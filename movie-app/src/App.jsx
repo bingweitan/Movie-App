@@ -22,11 +22,11 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [debouncedSearchTerm, setdebouncedSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
 
   //Debounce the search term to prevent making too many API requests
   //by waiting for the user to stop typing for 500ms
-  useDebounce(()=> setdebouncedSearchTerm(searchTerm), 500, [searchTerm])
+  useDebounce(()=> setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
 
   const fetchMovies = async (query  = '')=> {
 
@@ -35,7 +35,7 @@ const App = () => {
 
     try{
       const endpoint = query 
-      ? `${API_BASE_URL}/discover/search/movie?query=${encodeURIComponent(query)}`
+      ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
       :`${API_BASE_URL}/discover/movie?sort_by=popularity.desc` ;
 
       const response = await fetch(endpoint, API_OPTIONS);
